@@ -10,7 +10,7 @@ export default function Home() {
 
       <a
         className="fixed top-6 right-8 text-white/80 hover:text-white/50 transition-colors"
-        href="mailto:dev@jev.codes"
+        href="mailto:hi@jev.codes"
       >
         <LuSend size={24} />
       </a>
