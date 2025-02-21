@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jev - Frontend Engineer & Web Developer",
-  description: "Jev - Frontend Engineer & Web Developer based in Brighton, UK. My Tech Stack: JavaScript, TypeScript, React, Vue, Next, Nuxt, Tailwind, SASS",
+  title: "Jev - Frontend Web Developer",
+  description: "A passionate Frontend Web Developer and digital artist with 10+ years of commercial experience, specialising in building exceptional frontend solutions using JavaScript, TypeScript, React, and Vue.",
 };
 
 export default function RootLayout({

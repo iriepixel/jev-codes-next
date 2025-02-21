@@ -35,8 +35,8 @@ export default function Home() {
 
 
       <div className="flex flex-col items-center gap-2 px-10">
-        <p className="text-center lg:text-[20px]">Frontend Engineer & Web Developer</p>
-        <p className="text-center text-white/70">based in Brighton, UK</p>
+        <p className="text-center lg:text-[20px]">Frontend Web Developer</p>
+        <p className="text-center text-white/70">Brighton, UK</p>
       </div>
 
       <div className="mt-10">
