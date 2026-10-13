@@ -3,17 +3,27 @@
 @tailwind utilities;
 
 @layer base {
+  /* Colour tokens as RGB channels so Tailwind opacity modifiers work.
+     Dark is the default look; `.dark` is set on <html> by next-themes. */
   :root {
     --radius: 0.5rem;
-    --background: #0d0d0d;
-    /* Portrait yellow, as RGB channels so Tailwind opacity modifiers (brand/40) work */
-    --brand: 242 193 40;
+    --background: 245 245 244;
+    --foreground: 13 13 13;
+    --brand: 154 109 0; /* darker amber so yellow text stays readable on light */
+    color-scheme: light;
+  }
+
+  .dark {
+    --background: 13 13 13;
+    --foreground: 255 255 255;
+    --brand: 242 193 40; /* portrait yellow */
+    color-scheme: dark;
   }
 
   html,
   body {
-    background: var(--background);
-    color: #fff;
+    background: rgb(var(--background));
+    color: rgb(var(--foreground));
   }
 
   body {
@@ -39,7 +49,7 @@
 }
 
 .glitch:after {
-  color: #fff;
+  color: rgb(var(--foreground));
   opacity: 0.25;
   z-index: -2;
 }
