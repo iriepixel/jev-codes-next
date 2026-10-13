@@ -5,9 +5,10 @@ import { LuSend } from "react-icons/lu";
 import { copyEmail, TOAST_EVENT } from "@/lib/copy-email";
 
 /**
- * Paper-plane button that copies the email address. A small tooltip appears
- * under the icon for a moment after copying (also when triggered via the
- * `c` shortcut, which fires the same event).
+ * Paper-plane email link. It is a real mailto: link, so on phones and tablets
+ * (no hover) it opens the mail app. On devices with a pointer the click is
+ * intercepted and the address is copied instead, with a tooltip under the icon
+ * (also shown when triggered via the `c` shortcut, which fires the same event).
  */
 export function CopyEmailButton({ email, className = "" }: { email: string; className?: string }) {
   const [message, setMessage] = useState<string | null>(null);
@@ -26,17 +27,24 @@ export function CopyEmailButton({ email, className = "" }: { email: string; clas
     };
   }, []);
 
+  const onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const touch = window.matchMedia("(hover: none)").matches;
+    if (touch) return; // let the mailto: link open the mail app
+    e.preventDefault();
+    void copyEmail(email);
+  };
+
   return (
     <span className="relative inline-flex">
-      <button
-        type="button"
+      <a
+        href={`mailto:${email}`}
         className={className}
-        aria-label={`Copy email address ${email}`}
-        title={`Copy ${email}`}
-        onClick={() => void copyEmail(email)}
+        aria-label={`Email ${email}`}
+        title={email}
+        onClick={onClick}
       >
         <LuSend className="size-[22px] md:size-6" aria-hidden="true" />
-      </button>
+      </a>
       <span
         role="status"
         aria-live="polite"

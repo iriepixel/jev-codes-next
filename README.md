@@ -23,7 +23,7 @@ npm run lint
 - `src/app/not-found.tsx` – 404 page.
 - `src/components/theme-provider.tsx` / `theme-toggle.tsx` – light/dark switch (next-themes, dark by default, remembered in localStorage; animated circular wipe where View Transitions are supported).
 - `src/components/portrait.tsx` – portrait with hover/tap reveal. `pointer-glow.tsx` – glow that drifts toward the cursor.
-- `src/components/copy-email-button.tsx` – click the paper plane to copy the email; a tooltip confirms under the icon (falls back to mailto).
+- `src/components/copy-email-button.tsx` – the paper plane is a mailto: link; on touch devices it opens the mail app, on desktop the click copies the address and a tooltip confirms under the icon.
 - `src/components/shortcuts.tsx` – keyboard shortcuts: `t` theme, `c` copy email, `?` help.
 - `src/components/console-hello.tsx` – message in the browser console.
 - `src/app/icon.svg` – favicon that follows the OS colour scheme. Film grain and print styles live in `globals.css`.
