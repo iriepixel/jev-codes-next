@@ -17,7 +17,14 @@ export default {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
-  		colors: {}
+  		colors: {
+  			background: 'var(--background)',
+  			brand: 'rgb(var(--brand) / <alpha-value>)'
+  		},
+  		fontFamily: {
+  			sans: ['var(--font-geist-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+  			mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace']
+  		}
   	}
   },
   plugins: [require("tailwindcss-animate")],
