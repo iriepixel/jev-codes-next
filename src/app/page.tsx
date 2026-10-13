@@ -1,11 +1,15 @@
-import Image from "next/image";
 import Link from "next/link";
 import { JavaScript, TypeScript, React } from "developer-icons";
-import { LuSend, LuArrowUpRight, LuUserRound } from "react-icons/lu";
+import { LuArrowUpRight, LuBriefcase, LuMapPin, LuUserRound } from "react-icons/lu";
 import { SiRemix, SiShopify } from "react-icons/si";
 import { Hydrogen } from "@/components/icons/hydrogen";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SiteHeader } from "@/components/site-header";
+import { CopyEmailButton } from "@/components/copy-email-button";
+import { PointerGlow } from "@/components/pointer-glow";
+import { Portrait } from "@/components/portrait";
+import { currently, linkedinUrl } from "@/lib/site";
+import { requestEmail } from "@/lib/request";
 
 // Simple Icons marks fill their viewbox edge to edge, while developer-icons
 // glyphs carry padding, so they get a smaller size to match optically.
@@ -27,11 +31,8 @@ const work: { name: string; href: string; blurb?: string }[] = [
   { name: "US SIF", href: "https://www.ussif.org" },
 ];
 
-const linkedinUrl = "https://www.linkedin.com/in/iriepixel/";
-
 const social = [
-  { name: "LinkedIn", href: linkedinUrl, Icon: LuUserRound, external: true },
-  { name: "Email Jev", href: "mailto:hi@jev.codes", Icon: LuSend, external: false },
+  { name: "LinkedIn", href: linkedinUrl, Icon: LuUserRound },
 ];
 
 const sectionLabel =
@@ -40,42 +41,34 @@ const sectionLabel =
 const focusRing =
   "rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
-export default function Home() {
+const navItem = `${focusRing} text-foreground/60 transition-colors hover:text-brand focus-visible:text-brand`;
+
+export default async function Home() {
+  const email = await requestEmail();
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background py-20 text-foreground">
-
-      {/* Soft brand glow behind the portrait */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-[22%] -z-0 size-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,theme(colors.brand/0.08),transparent)] md:top-[30%] md:size-[760px]"
-      />
+      <div aria-hidden="true" className="grain" />
+      <PointerGlow />
 
       <SiteHeader>
-        <ThemeToggle
-          className={`${focusRing} text-foreground/60 transition-colors hover:text-brand focus-visible:text-brand`}
-        />
-        {social.map(({ name, href, Icon, external }) => (
+        <ThemeToggle className={navItem} />
+        {social.map(({ name, href, Icon }) => (
           <a
             key={name}
-            className={`${focusRing} text-foreground/60 transition-colors hover:text-brand focus-visible:text-brand`}
+            className={navItem}
             href={href}
             aria-label={name}
-            title={external ? href.replace("https://", "") : href.replace("mailto:", "")}
-            {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            title={href.replace("https://", "")}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Icon className="size-[22px] md:size-6" />
           </a>
         ))}
+        <CopyEmailButton email={email} className={navItem} />
       </SiteHeader>
 
-      <Image
-        className="relative mb-4 size-[200px] rounded-full ring-1 ring-brand/40 md:mb-8 md:size-[300px]"
-        src="/iriepixel.webp"
-        alt="Portrait of Jev"
-        width={300}
-        height={300}
-        priority
-      />
+      <Portrait />
 
       <h1
         className="glitch relative z-[1] my-4 text-[32px] font-bold tracking-tight md:text-[48px]"
@@ -84,10 +77,25 @@ export default function Home() {
         Jev
       </h1>
 
-      <div className="relative flex flex-col items-center gap-1 px-10">
+      <div className="relative flex flex-col items-center gap-3 px-10">
         <p className="text-center text-lg lg:text-[20px]">Full Stack Web Developer</p>
-        <p className="text-center text-foreground/60">Brighton, UK</p>
-        <p className="mt-1 text-center text-sm text-foreground/50">10+ years of commercial experience</p>
+        <p className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-sm text-foreground/60">
+          <span className="inline-flex items-center gap-1.5">
+            <LuMapPin className="size-3.5 text-foreground/40" aria-hidden="true" />
+            Brighton, UK
+          </span>
+          <span aria-hidden="true" className="text-foreground/25">·</span>
+          <span className="inline-flex items-center gap-1.5">
+            <LuBriefcase className="size-3.5 text-foreground/40" aria-hidden="true" />
+            15+ years of commercial experience
+          </span>
+        </p>
+        {currently && (
+          <p className="mt-1 inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-3.5 py-1 text-xs text-foreground/80">
+            <span aria-hidden="true" className="size-1.5 rounded-full bg-emerald-400 motion-safe:animate-pulse" />
+            {currently}
+          </p>
+        )}
       </div>
 
       <section className="relative mt-12">
@@ -107,7 +115,7 @@ export default function Home() {
 
       <section className="relative mt-12">
         <h2 className={sectionLabel}>Recent Work</h2>
-        <ul className="flex flex-col text-center text-foreground/70 max-md:divide-y max-md:text-[14px] md:flex-row md:divide-x divide-solid divide-foreground/15">
+        <ul className="work-list flex flex-col text-center text-foreground/70 max-md:divide-y max-md:text-[14px] md:flex-row md:divide-x divide-solid divide-foreground/15">
           {work.map(({ name, href, blurb }) => (
             <li key={name} className="flex justify-center max-md:py-2 md:px-4">
               <Link
