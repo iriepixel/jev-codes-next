@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "@/styles/globals.css";
@@ -18,25 +19,42 @@ const title = "Jev - Full Stack Web Developer";
 const description =
   "Jev is a Full Stack Web Developer in Brighton, UK with 10+ years of commercial experience, building ecommerce and web applications with JavaScript, TypeScript, React, Remix and Shopify Hydrogen.";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title,
-  description,
-  alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    url: siteUrl,
-    siteName: "jev.codes",
-    locale: "en_GB",
+/**
+ * Resolves the origin the page was requested on (localhost in dev, a Vercel
+ * preview URL, or jev.codes) so generated image URLs such as the Open Graph
+ * card point at the same domain. Falls back to the production URL.
+ */
+async function requestOrigin() {
+  const h = await headers();
+  const host = h.get("x-forwarded-host") ?? h.get("host");
+  if (!host) return siteUrl;
+  const proto = h.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
+  return `${proto}://${host}`;
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const origin = await requestOrigin();
+  return {
+    metadataBase: new URL(origin),
     title,
     description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-  },
-};
+    // Canonical stays on the real domain even on preview deployments.
+    alternates: { canonical: siteUrl },
+    openGraph: {
+      type: "website",
+      url: origin,
+      siteName: "jev.codes",
+      locale: "en_GB",
+      title,
+      description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: [
