@@ -116,6 +116,33 @@
   }
 }
 
+/* Tooltip ("copied" under the email icon) pops in from its anchor. */
+.tip-in {
+  transform-origin: top left;
+  animation: tip-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.tip-in-right {
+  transform-origin: top right;
+}
+
+@keyframes tip-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tip-in {
+    animation: none;
+  }
+}
+
 /* Film grain over the dark theme. Sits above content, below the header. */
 .grain {
   position: fixed;

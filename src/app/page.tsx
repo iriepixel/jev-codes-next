@@ -8,6 +8,7 @@ import { SiteHeader } from "@/components/site-header";
 import { CopyEmailButton } from "@/components/copy-email-button";
 import { PointerGlow } from "@/components/pointer-glow";
 import { Portrait } from "@/components/portrait";
+import { BioToggle } from "@/components/bio-toggle";
 import { currently, linkedinUrl } from "@/lib/site";
 import { requestEmail } from "@/lib/request";
 
@@ -78,7 +79,7 @@ export default async function Home() {
       </h1>
 
       <div className="relative flex flex-col items-center gap-3 px-10">
-        <p className="text-center text-lg lg:text-[20px]">Full Stack Web Developer</p>
+        <BioToggle title="Full Stack Web Developer" />
         <p className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-sm text-foreground/60">
           <span className="inline-flex items-center gap-1.5">
             <LuMapPin className="size-3.5 text-foreground/40" aria-hidden="true" />

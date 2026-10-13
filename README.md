@@ -22,7 +22,7 @@ npm run lint
 - `src/app/opengraph-image.tsx` / `apple-icon.tsx` – generated share image and iOS icon.
 - `src/app/not-found.tsx` – 404 page.
 - `src/components/theme-provider.tsx` / `theme-toggle.tsx` – light/dark switch (next-themes, dark by default, remembered in localStorage; animated circular wipe where View Transitions are supported).
-- `src/components/portrait.tsx` – portrait with hover/tap reveal. `pointer-glow.tsx` – glow that drifts toward the cursor.
+- `src/components/portrait.tsx` – portrait; each click rotates the duotone hue (6 steps back to yellow). `bio-toggle.tsx` – the role line expands a short bio (text in `site.ts`). `pointer-glow.tsx` – glow that drifts toward the cursor.
 - `src/components/copy-email-button.tsx` – the paper plane is a mailto: link; on touch devices it opens the mail app, on desktop the click copies the address and a tooltip confirms under the icon.
 - `src/components/shortcuts.tsx` – keyboard shortcuts: `t` theme, `c` copy email, `?` help.
 - `src/components/console-hello.tsx` – message in the browser console.

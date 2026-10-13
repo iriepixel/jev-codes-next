@@ -45,14 +45,12 @@ export function CopyEmailButton({ email, className = "" }: { email: string; clas
       >
         <LuSend className="size-[22px] md:size-6" aria-hidden="true" />
       </a>
-      <span
-        role="status"
-        aria-live="polite"
-        className={`pointer-events-none absolute right-0 top-full mt-4 whitespace-nowrap rounded-md border border-foreground/10 bg-background/95 px-2.5 py-1 text-xs text-foreground shadow-lg backdrop-blur transition-[opacity,transform] duration-200 ${
-          message ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0"
-        }`}
-      >
-        {message}
+      <span role="status" aria-live="polite" className="pointer-events-none absolute right-0 top-full mt-4">
+        {message && (
+          <span className="tip-in tip-in-right block whitespace-nowrap rounded-md border border-foreground/10 bg-background/95 px-2.5 py-1 text-xs text-foreground shadow-lg backdrop-blur">
+            {message}
+          </span>
+        )}
       </span>
     </span>
   );
