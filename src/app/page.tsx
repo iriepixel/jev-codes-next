@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { JavaScript, TypeScript, React } from "developer-icons";
+import { TypeScript, React } from "developer-icons";
 import { LuArrowUpRight, LuBriefcase, LuMapPin, LuUserRound } from "react-icons/lu";
-import { SiRemix, SiShopify } from "react-icons/si";
+import { SiClaude, SiRemix, SiShopify } from "react-icons/si";
 import { Hydrogen } from "@/components/icons/hydrogen";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SiteHeader } from "@/components/site-header";
@@ -15,12 +15,12 @@ import { requestEmail } from "@/lib/request";
 // Simple Icons marks fill their viewbox edge to edge, while developer-icons
 // glyphs carry padding, so they get a smaller size to match optically.
 const stack = [
-  { name: "JavaScript", Icon: JavaScript },
   { name: "TypeScript", Icon: TypeScript },
   { name: "React", Icon: React },
   { name: "Shopify", Icon: SiShopify, color: "#95bf47", size: 30 },
   { name: "Remix", Icon: SiRemix, size: 23 }, // currentColor: follows the theme
   { name: "Shopify Hydrogen", Icon: Hydrogen, color: "currentColor", size: 34 },
+  { name: "Claude", Icon: SiClaude, color: "#d97757", size: 27 },
 ];
 
 // Add a short `blurb` to any entry to show what the work was, e.g.
@@ -105,17 +105,24 @@ export default async function Home() {
           {stack.map(({ name, Icon, color, size = 30 }) => (
             <li
               key={name}
-              title={name}
-              className="flex size-[30px] items-center justify-center text-foreground"
+              className="stack-item relative flex size-[30px] items-center justify-center text-foreground"
             >
               <Icon size={size} color={color} aria-label={name} role="img" />
+              <span
+                aria-hidden="true"
+                className="stack-tip pointer-events-none absolute left-1/2 top-full z-10 mt-3 -translate-x-1/2"
+              >
+                <span className="tip-in tip-in-center block whitespace-nowrap rounded-md border border-foreground/10 bg-background/95 px-2.5 py-1 text-xs text-foreground shadow-lg backdrop-blur">
+                  {name}
+                </span>
+              </span>
             </li>
           ))}
         </ul>
       </section>
 
       <section className="relative mt-12">
-        <h2 className={sectionLabel}>Recent Work</h2>
+        <h2 className={sectionLabel}>Past Work</h2>
         <ul className="work-list flex flex-col text-center text-foreground/70 max-md:divide-y max-md:text-[14px] md:flex-row md:divide-x divide-solid divide-foreground/15">
           {work.map(({ name, href, blurb }) => (
             <li key={name} className="flex justify-center max-md:py-2 md:px-4">

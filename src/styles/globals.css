@@ -126,6 +126,22 @@
   transform-origin: top right;
 }
 
+.tip-in-center {
+  transform-origin: top center;
+}
+
+/* Stack icon tooltips: same card as the "copied" tip, shown on hover only on
+   devices that have one. Toggling display restarts the pop each time. */
+.stack-tip {
+  display: none;
+}
+
+@media (hover: hover) {
+  .stack-item:hover .stack-tip {
+    display: block;
+  }
+}
+
 @keyframes tip-in {
   from {
     opacity: 0;
