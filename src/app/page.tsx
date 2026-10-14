@@ -49,6 +49,17 @@ export default async function Home() {
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background py-20 text-foreground">
       <div aria-hidden="true" className="grain" />
+      <div aria-hidden="true" className="vhs">
+        <span className="vhs-band" />
+        <span className="vhs-line" />
+        <span className="vhs-tear" />
+        <span className="vhs-drop vhs-drop-a" />
+        <span className="vhs-drop vhs-drop-b" />
+        <span className="vhs-drop vhs-drop-c" />
+      </div>
+      <div aria-hidden="true" className="crt-mask" />
+      <div aria-hidden="true" className="crt-bezel" />
+      <div aria-hidden="true" className="crt-on" />
       <PointerGlow />
 
       <SiteHeader>

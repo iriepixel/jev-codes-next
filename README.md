@@ -26,8 +26,8 @@ npm run lint
 - `src/components/copy-email-button.tsx` – the paper plane is a mailto: link; on touch devices it opens the mail app, on desktop the click copies the address and a tooltip confirms under the icon.
 - `src/components/shortcuts.tsx` – keyboard shortcuts: `t` theme, `c` copy email, `?` help.
 - `src/components/console-hello.tsx` – message in the browser console.
-- `src/app/icon.svg` + `icon.tsx` – favicon: black rounded square with a yellow J (SVG, plus a generated PNG for Safari). Film grain and print styles live in `globals.css`.
+- `src/app/icon.svg` + `icon.tsx` – favicon: black rounded square with a yellow J (SVG, plus a generated PNG for Safari).
 - Analytics: `@vercel/analytics` (no-op outside Vercel).
 - `src/components/icons/hydrogen.tsx` – inline Shopify Hydrogen mark (no icon library has one).
-- `src/styles/globals.css` – colour tokens (`--background`, `--foreground`, `--brand`; light on `:root`, dark under `.dark`) and the glitch heading effect.
+- `src/styles/globals.css` – colour tokens (`--background`, `--foreground`, `--brand`; light on `:root`, dark under `.dark`), the screen-effect tokens (`--ink` and the `*-alpha` strengths, tuned per theme), the glitch on the heading and portrait, and the fixed overlay layers: film grain, VHS (scanlines, vignette, rolling band, sweep line, tracking tear) and CRT (phosphor grille, tube bezel, power-on sweep). Every animation is gated behind `prefers-reduced-motion`, and the overlays are hidden in print.
 - `public/iriepixel.webp` / `src/app/portrait.png` – portrait for the page and for generated images.
